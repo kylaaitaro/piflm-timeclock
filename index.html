@@ -1,40 +1,152 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#071f45">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="PIFLM Time Clock">
-<title>PIFLM Time Clock</title>
-<link rel="manifest" href="manifest.webmanifest">
-<link rel="icon" href="icon-192.png">
-<link rel="apple-touch-icon" href="icon-512.png">
-<link rel="stylesheet" href="styles.css">
+  <meta charset="utf-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  >
+
+  <meta name="theme-color" content="#071f45">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta
+    name="apple-mobile-web-app-status-bar-style"
+    content="black-translucent"
+  >
+  <meta
+    name="apple-mobile-web-app-title"
+    content="PIFLM Time Clock"
+  >
+
+  <title>PIFLM Time Clock</title>
+
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon-192.png">
+  <link rel="apple-touch-icon" href="icon-512.png">
+  <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
-<main class="app-shell">
-<section class="hero-card">
-<img class="app-icon" src="icon-512.png" alt="PIFLM Time Clock icon">
-<p class="eyebrow">55th PIFLM</p>
-<h1>Time Clock</h1>
-<p class="subtitle">Record your work time using the official PIFLM employee time clock.</p>
-<a id="timeClockButton" class="primary-button" href="#" target="_blank" rel="noopener">Clock In / Clock Out</a>
-<p id="configurationMessage" class="configuration-message" hidden>The Google Form link has not been configured yet.</p>
-<div class="info-grid">
-<article class="info-card"><span>Regular shift</span><strong>8:00 AM–4:30 PM</strong></article>
-<article class="info-card"><span>Overtime</span><strong>Before or after shift</strong></article>
-</div>
-<button id="installButton" class="secondary-button" type="button" hidden>Install Time Clock</button>
-<details class="install-help">
-<summary>Add to iPhone Home Screen</summary>
-<ol><li>Open this page in Safari.</li><li>Tap Share.</li><li>Select <strong>Add to Home Screen</strong>.</li><li>Tap <strong>Add</strong>.</li></ol>
-</details>
-</section>
-<footer>Authorized PIFLM personnel only.</footer>
-</main>
-<script src="config.js"></script>
-<script src="app.js"></script>
+  <main class="app-shell">
+
+    <section class="hero-card" aria-labelledby="app-title">
+
+      <img
+        class="app-icon"
+        src="icon-512.png"
+        alt="PIFLM Time Clock icon"
+      >
+
+      <p class="eyebrow">55th PIFLM</p>
+
+      <h1 id="app-title">Time Clock</h1>
+
+      <p class="subtitle">
+        Select your employee ID and record your work time.
+      </p>
+
+      <form id="timeClockForm" novalidate>
+
+        <div class="form-group">
+          <label for="employeeId">Employee</label>
+
+          <select
+            id="employeeId"
+            name="employeeId"
+            required
+          >
+            <option value="">Loading employees…</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="notes">Optional note</label>
+
+          <textarea
+            id="notes"
+            name="notes"
+            rows="3"
+            maxlength="500"
+            placeholder="Enter a missed-punch or correction note, if needed."
+          ></textarea>
+        </div>
+
+        <div class="button-grid">
+
+          <button
+            class="clock-button clock-in"
+            type="button"
+            data-action="clock in"
+          >
+            Clock In
+          </button>
+
+          <button
+            class="clock-button clock-out"
+            type="button"
+            data-action="clock out"
+          >
+            Clock Out
+          </button>
+
+        </div>
+
+      </form>
+
+      <div
+        id="status"
+        class="status"
+        role="status"
+        aria-live="polite"
+        hidden
+      ></div>
+
+      <div class="info-grid">
+
+        <article class="info-card">
+          <span>Regular shift</span>
+          <strong>8:00 AM–4:30 PM</strong>
+        </article>
+
+        <article class="info-card">
+          <span>Overtime</span>
+          <strong>Before or after shift</strong>
+        </article>
+
+      </div>
+
+      <button
+        id="installButton"
+        class="secondary-button"
+        type="button"
+        hidden
+      >
+        Install Time Clock
+      </button>
+
+      <details class="install-help">
+        <summary>Add to iPhone Home Screen</summary>
+
+        <ol>
+          <li>Open this page in Safari.</li>
+          <li>Tap the Share button.</li>
+          <li>
+            Select <strong>Add to Home Screen</strong>.
+          </li>
+          <li>Tap <strong>Add</strong>.</li>
+        </ol>
+      </details>
+
+    </section>
+
+    <footer>
+      Authorized PIFLM personnel only.
+    </footer>
+
+  </main>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
