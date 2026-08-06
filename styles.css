@@ -368,3 +368,19 @@ footer {
     grid-template-columns: 1fr;
   }
 }
+
+.help-box {
+    margin: 20px 0;
+    padding: 16px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #dbe7f7;
+    text-align: center;
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+.help-box strong {
+    color: #f3c24f;
+}
