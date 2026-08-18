@@ -47,7 +47,10 @@
     href="styles.css"
   >
 
-  <!-- OneSignal Push Notifications -->
+  <!-- =========================================
+       OneSignal Push Notifications
+       ========================================= -->
+
   <script
     src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js"
     defer
@@ -59,18 +62,23 @@
 
     OneSignalDeferred.push(
       async function (OneSignal) {
+
         await OneSignal.init({
           appId:
             "ab580459-c605-49b8-8d2c-401bf7a99cec",
 
           serviceWorkerPath:
-            "onesignal/OneSignalSDKWorker.js",
+            "OneSignalSDKWorker.js",
 
           serviceWorkerParam: {
             scope:
-              "/piflm-timeclock/onesignal/"
+              "/piflm-timeclock/"
           }
         });
+
+        console.log(
+          "PIFLM OneSignal initialized."
+        );
       }
     );
   </script>
@@ -104,6 +112,11 @@
         Select your employee ID and record your work time.
       </p>
 
+
+      <!-- =====================================
+           TIME CLOCK FORM
+           ===================================== -->
+
       <form
         id="timeClockForm"
         novalidate
@@ -127,6 +140,7 @@
 
         </div>
 
+
         <div class="form-group">
 
           <label for="notes">
@@ -142,6 +156,7 @@
           ></textarea>
 
         </div>
+
 
         <div class="button-grid">
 
@@ -165,6 +180,11 @@
 
       </form>
 
+
+      <!-- =====================================
+           STATUS MESSAGE
+           ===================================== -->
+
       <div
         id="status"
         class="status"
@@ -173,13 +193,23 @@
         hidden
       ></div>
 
+
+      <!-- =====================================
+           PUSH NOTIFICATION BUTTON
+           ===================================== -->
+
       <button
-        id="enableNotifications"
+        id="notificationButton"
         class="secondary-button"
         type="button"
       >
         🔔 Enable Clock Reminders
       </button>
+
+
+      <!-- =====================================
+           MISSED PUNCH INFORMATION
+           ===================================== -->
 
       <div class="help-box">
 
@@ -203,6 +233,11 @@
 
       </div>
 
+
+      <!-- =====================================
+           SHIFT INFORMATION
+           ===================================== -->
+
       <div class="info-grid">
 
         <article class="info-card">
@@ -216,6 +251,7 @@
           </strong>
 
         </article>
+
 
         <article class="info-card">
 
@@ -231,6 +267,11 @@
 
       </div>
 
+
+      <!-- =====================================
+           INSTALL BUTTON
+           ===================================== -->
+
       <button
         id="installButton"
         class="secondary-button"
@@ -239,6 +280,11 @@
       >
         Install Time Clock
       </button>
+
+
+      <!-- =====================================
+           IPHONE INSTALL INSTRUCTIONS
+           ===================================== -->
 
       <details class="install-help">
 
@@ -276,14 +322,105 @@
 
     </section>
 
+
     <footer>
       Authorized PIFLM personnel only.
     </footer>
 
   </main>
 
+
+  <!-- =========================================
+       PIFLM APPLICATION FILES
+       ========================================= -->
+
   <script src="config.js"></script>
+
   <script src="app.js"></script>
+
+
+  <!-- =========================================
+       ENABLE ONESIGNAL NOTIFICATIONS
+       ========================================= -->
+
+  <script>
+
+    const notificationButton =
+      document.getElementById(
+        "notificationButton"
+      );
+
+    if (notificationButton) {
+
+      notificationButton.addEventListener(
+        "click",
+        async () => {
+
+          notificationButton.disabled = true;
+
+          notificationButton.textContent =
+            "Enabling reminders…";
+
+          try {
+
+            await new Promise((resolve) => {
+
+              window.OneSignalDeferred =
+                window.OneSignalDeferred || [];
+
+              OneSignalDeferred.push(
+                async function (OneSignal) {
+
+                  await OneSignal.Notifications
+                    .requestPermission();
+
+                  resolve();
+
+                }
+              );
+
+            });
+
+
+            if (
+              Notification.permission ===
+              "granted"
+            ) {
+
+              notificationButton.textContent =
+                "✓ Clock Reminders Enabled";
+
+            } else {
+
+              notificationButton.textContent =
+                "🔔 Enable Clock Reminders";
+
+              notificationButton.disabled =
+                false;
+
+            }
+
+          } catch (error) {
+
+            console.error(
+              "OneSignal notification error:",
+              error
+            );
+
+            notificationButton.textContent =
+              "🔔 Enable Clock Reminders";
+
+            notificationButton.disabled =
+              false;
+
+          }
+
+        }
+      );
+
+    }
+
+  </script>
 
 </body>
 </html>
