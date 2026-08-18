@@ -59,7 +59,6 @@
 
     OneSignalDeferred.push(
       async function (OneSignal) {
-
         await OneSignal.init({
           appId:
             "ab580459-c605-49b8-8d2c-401bf7a99cec",
@@ -72,7 +71,6 @@
               "/piflm-timeclock/onesignal/"
           }
         });
-
       }
     );
   </script>
@@ -174,6 +172,14 @@
         aria-live="polite"
         hidden
       ></div>
+
+      <button
+        id="enableNotifications"
+        class="secondary-button"
+        type="button"
+      >
+        🔔 Enable Clock Reminders
+      </button>
 
       <div class="help-box">
 
