@@ -9,11 +9,17 @@
   >
 
   <meta name="theme-color" content="#071f45">
-  <meta name="apple-mobile-web-app-capable" content="yes">
+
+  <meta
+    name="apple-mobile-web-app-capable"
+    content="yes"
+  >
+
   <meta
     name="apple-mobile-web-app-status-bar-style"
     content="black-translucent"
   >
+
   <meta
     name="apple-mobile-web-app-title"
     content="PIFLM Time Clock"
@@ -21,16 +27,66 @@
 
   <title>PIFLM Time Clock</title>
 
-  <link rel="manifest" href="manifest.webmanifest">
-  <link rel="icon" href="icon-192.png">
-  <link rel="apple-touch-icon" href="icon-512.png">
-  <link rel="stylesheet" href="styles.css">
+  <link
+    rel="manifest"
+    href="manifest.webmanifest"
+  >
+
+  <link
+    rel="icon"
+    href="icon-192.png"
+  >
+
+  <link
+    rel="apple-touch-icon"
+    href="icon-512.png"
+  >
+
+  <link
+    rel="stylesheet"
+    href="styles.css"
+  >
+
+  <!-- OneSignal Push Notifications -->
+  <script
+    src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js"
+    defer
+  ></script>
+
+  <script>
+    window.OneSignalDeferred =
+      window.OneSignalDeferred || [];
+
+    OneSignalDeferred.push(
+      async function (OneSignal) {
+
+        await OneSignal.init({
+          appId:
+            "ab580459-c605-49b8-8d2c-401bf7a99cec",
+
+          serviceWorkerPath:
+            "onesignal/OneSignalSDKWorker.js",
+
+          serviceWorkerParam: {
+            scope:
+              "/piflm-timeclock/onesignal/"
+          }
+        });
+
+      }
+    );
+  </script>
+
 </head>
 
 <body>
+
   <main class="app-shell">
 
-    <section class="hero-card" aria-labelledby="app-title">
+    <section
+      class="hero-card"
+      aria-labelledby="app-title"
+    >
 
       <img
         class="app-icon"
@@ -38,30 +94,46 @@
         alt="PIFLM Time Clock icon"
       >
 
-      <p class="eyebrow">55th PIFLM</p>
+      <p class="eyebrow">
+        55th PIFLM
+      </p>
 
-      <h1 id="app-title">Time Clock</h1>
+      <h1 id="app-title">
+        Time Clock
+      </h1>
 
       <p class="subtitle">
         Select your employee ID and record your work time.
       </p>
 
-      <form id="timeClockForm" novalidate>
+      <form
+        id="timeClockForm"
+        novalidate
+      >
 
         <div class="form-group">
-          <label for="employeeId">Employee</label>
+
+          <label for="employeeId">
+            Employee
+          </label>
 
           <select
             id="employeeId"
             name="employeeId"
             required
           >
-            <option value="">Loading employees…</option>
+            <option value="">
+              Loading employees…
+            </option>
           </select>
+
         </div>
 
         <div class="form-group">
-          <label for="notes">Optional note</label>
+
+          <label for="notes">
+            Optional note
+          </label>
 
           <textarea
             id="notes"
@@ -70,6 +142,7 @@
             maxlength="500"
             placeholder="Enter a missed-punch or correction note, if needed."
           ></textarea>
+
         </div>
 
         <div class="button-grid">
@@ -102,23 +175,52 @@
         hidden
       ></div>
 
-<div class="help-box">
-      <strong>📋 Missed a punch?</strong><br>
-    Contact <strong>Akked (775-4814)</strong><br>
-    or <strong>Rolm (775-6674)</strong>.
-</div>
+      <div class="help-box">
 
-<div class="info-grid">
+        <strong>
+          📋 Missed a punch?
+        </strong>
+
+        <br>
+
+        Contact
+        <strong>
+          Akked (775-4814)
+        </strong>
+
+        <br>
+
+        or
+        <strong>
+          Rolm (775-6674)
+        </strong>.
+
+      </div>
+
       <div class="info-grid">
 
         <article class="info-card">
-          <span>Regular shift</span>
-          <strong>8:00 AM–4:30 PM</strong>
+
+          <span>
+            Regular shift
+          </span>
+
+          <strong>
+            8:00 AM–4:30 PM
+          </strong>
+
         </article>
 
         <article class="info-card">
-          <span>Overtime</span>
-          <strong>Before or after shift</strong>
+
+          <span>
+            Overtime
+          </span>
+
+          <strong>
+            Before or after shift
+          </strong>
+
         </article>
 
       </div>
@@ -133,16 +235,37 @@
       </button>
 
       <details class="install-help">
-        <summary>Add to iPhone Home Screen</summary>
+
+        <summary>
+          Add to iPhone Home Screen
+        </summary>
 
         <ol>
-          <li>Open this page in Safari.</li>
-          <li>Tap the Share button.</li>
+
           <li>
-            Select <strong>Add to Home Screen</strong>.
+            Open this page in Safari.
           </li>
-          <li>Tap <strong>Add</strong>.</li>
+
+          <li>
+            Tap the Share button.
+          </li>
+
+          <li>
+            Select
+            <strong>
+              Add to Home Screen
+            </strong>.
+          </li>
+
+          <li>
+            Tap
+            <strong>
+              Add
+            </strong>.
+          </li>
+
         </ol>
+
       </details>
 
     </section>
@@ -155,5 +278,6 @@
 
   <script src="config.js"></script>
   <script src="app.js"></script>
+
 </body>
 </html>
